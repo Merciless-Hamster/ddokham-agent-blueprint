@@ -97,7 +97,6 @@
   .flow{ display:flex; flex-direction:column; gap:10px; }
   .lane{ display:flex; align-items:stretch; gap:12px; background:var(--lane);
     border:1px solid var(--line); border-radius:5px; padding:8px; }
-  .lane.out{ background:transparent; border-style:dashed; border-color:var(--line3); opacity:.62; }
   .lane .lb{ flex:0 0 74px; display:flex; flex-direction:column; justify-content:center;
     padding-left:7px; border-right:1px solid var(--line2); }
   .lane .lb .n{ font-family:var(--mono); font-size:14px; font-weight:700; color:var(--teal); letter-spacing:1.1px; }
@@ -110,29 +109,19 @@
     border-radius:4px 0 0 4px; background:var(--teal); }
   .scard.human::before{ background:var(--human); }
   .scard.check::before{ background:linear-gradient(var(--teal) 50%, var(--human) 50%); }
-  .scard.out{ background:#F5F1E2; border-style:dashed; border-color:var(--line3); }
-  .scard.out::before{ background:var(--line3); }
   .scard .nm{ flex:1 1 auto; min-width:0; font-size:17px; font-weight:700; letter-spacing:-.3px; word-break:keep-all; }
   .loopsub{ display:block; font-size:12.5px; font-weight:500; font-style:normal;
     color:var(--human); letter-spacing:-.1px; margin-top:5px; }
-  .scard.out .nm{ color:var(--ink3); font-weight:600; }
   .scard .tags{ display:flex; gap:5px; align-items:center; flex:0 0 auto; }
   .who{ font-size:11.5px; font-weight:700; letter-spacing:-.1px;
     padding:3px 9px; border-radius:2px; white-space:nowrap; }
   .who.ai{ background:var(--teal-soft); color:var(--teal); }
   .who.human{ background:var(--human-soft); color:var(--human); }
   .who.check{ background:var(--teal-soft); color:var(--teal); border:1px solid var(--human); }
-  .bn{ font-size:11.5px; font-weight:700; letter-spacing:-.1px;
-    background:var(--alert); color:#fff; padding:3px 8px; border-radius:2px; white-space:nowrap; }
-  .lane.out .bn{ background:var(--line3); color:var(--paper); }
-  .loopnote{ font-family:var(--mono); font-size:10px; color:var(--human); letter-spacing:.5px;
-    white-space:nowrap; }
+  .own{ font-size:11.5px; font-weight:600; letter-spacing:-.1px; padding:2px 8px; border-radius:2px;
+    white-space:nowrap; border:1px solid var(--line3); color:var(--ink2); background:var(--paper); }
+  .own.own-main{ border-color:var(--teal); color:var(--teal); }
   .loopsvg{ position:absolute; inset:0; pointer-events:none; overflow:visible; }
-
-  .scope{ display:flex; align-items:center; gap:8px; margin-top:10px; font-size:11.5px; color:var(--ink3); }
-  .scope .bar{ height:1px; background:var(--line2); flex:1 1 auto; }
-  .scope .tag{ font-size:12px; font-weight:600; letter-spacing:-.1px; color:var(--teal);
-    border:1px solid #CBDDD8; background:var(--teal-soft); padding:2px 8px; border-radius:2px; white-space:nowrap; }
 
   .rules{ margin-top:13px; padding-top:11px; border-top:1px solid var(--line); }
   .rules .glabel{ border:0; padding:0; margin-bottom:6px; }
@@ -141,6 +130,7 @@
   .legend{ display:flex; flex-wrap:wrap; gap:16px; margin-top:12px; padding-top:10px;
     border-top:1px solid var(--line); font-size:12px; color:var(--ink3); letter-spacing:-.1px; }
   .legend i{ display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:5px; vertical-align:-1px; }
+  .legend .own{ font-size:10.5px; padding:0 6px; margin-right:5px; }
 
   /* ── 결과물 */
   .outname{ font-size:24px; font-weight:700; letter-spacing:-.5px; line-height:1.25;
@@ -152,7 +142,7 @@
   .kv .k{ flex:0 0 66px; font-size:12px; color:var(--ink4); letter-spacing:.1px; }
   .kv .v{ flex:1 1 auto; min-width:0; font-weight:600; word-break:keep-all; }
 
-  /* ── 부품 */
+  /* ── 구성 */
   .parts{ margin-top:20px; padding-top:15px; border-top:1px solid var(--line); }
   .parts-hd{ display:flex; align-items:baseline; gap:10px; margin-bottom:11px; padding-top:8px; }
   .parts-hd .tt{ font-size:15px; font-weight:700; letter-spacing:-.3px; }
@@ -161,16 +151,23 @@
     color:var(--paper); background:var(--teal); border:0; padding:7px 15px; border-radius:2px; cursor:pointer; }
   .copy:hover{ background:var(--teal2); }
   .copy.done{ background:var(--human); }
-  .pgrid{ display:grid; grid-template-columns:repeat(6,1fr); gap:0 18px; }
+  .pgrid{ display:grid; grid-template-columns:repeat(var(--cols,4), minmax(0,1fr)); gap:0 18px; }
   .part{ padding:0 0 0 13px; border-left:1px solid var(--line); min-width:0; }
   .part:first-child{ border-left:0; padding-left:0; }
   .part .h{ display:flex; align-items:baseline; gap:6px; font-size:13.5px; font-weight:700;
-    letter-spacing:-.2px; margin-bottom:4px; word-break:keep-all; }
+    letter-spacing:-.2px; margin-bottom:5px; word-break:keep-all; }
   .part .h i{ flex:0 0 auto; width:7px; height:7px; border-radius:50%; background:var(--teal); }
+  .part .h .ct{ margin-left:auto; font-family:var(--mono); font-size:11px; font-weight:600; color:var(--ink4); }
+  .part .b{ font-size:12.5px; color:var(--ink2); line-height:1.65; letter-spacing:-.15px; word-break:keep-all; }
+  .part .it{ font-size:12.5px; color:var(--ink2); line-height:1.55; margin:4px 0; letter-spacing:-.15px; word-break:keep-all; }
+  .part .it b{ color:var(--ink); font-weight:700; }
+  .part .it .sm{ color:var(--ink4); }
   .part.off .h{ color:var(--ink4); font-weight:600; }
   .part.off .h i{ background:transparent; border:1px solid var(--line3); }
-  .part .b{ font-size:12.5px; color:var(--ink2); line-height:1.65; letter-spacing:-.15px; word-break:keep-all; }
-  .part.off .b{ color:var(--ink4); }
+  .kind{ font-size:10px; font-weight:700; padding:0 5px; border-radius:2px; margin-left:4px;
+    vertical-align:1px; white-space:nowrap; }
+  .kind.gen{ background:var(--teal-soft); color:var(--teal); border:1px solid #CBDDD8; }
+  .kind.dom{ background:#F3E6D8; color:#8A5A2B; border:1px solid #E2CDB4; }
 
   /* ── 마무리 띠 */
   .note{ display:flex; flex-wrap:wrap; align-items:center; gap:0 8px; margin-top:14px;
@@ -220,25 +217,27 @@
   var 결과물 = (D.결과물 || {});
   var 입력 = (D.입력 || {});
   var 과정 = arr(D.과정).slice().sort(function(a,b){ return (a.순서||0) - (b.순서||0); });
-  var 범위 = (D.범위 || {});
-  var 부품 = (D.부품 || {});
   var 구성 = (D.구성 || {});
-  var 이번 = arr(범위.이번에만들것).map(Number);
-  var inScope = function(n){ return 이번.length === 0 ? true : 이번.indexOf(Number(n)) >= 0; };
+  var 에이전트 = (track === '에이전트' && 구성.에이전트) ? 구성.에이전트 : null;
+  var 도구 = (track === '도구' && 구성.도구) ? 구성.도구 : {};
+  var 서브 = 에이전트 ? arr(에이전트.서브에이전트) : [];
+  var 스킬목록 = 에이전트 ? arr(에이전트.스킬) : [];
+  var 폴더 = (에이전트 && 에이전트.폴더) ? 에이전트.폴더 : {};
 
   /* ── 갈래별 안내 문구 */
   function hint(){
     if (track === '스킬') return 'Claude 계정에 올려 어디서든 쓴다';
     if (track === '도구') {
-      var t = 부품.혼자도는도구 || {};
-      if (t.단계 === '실행 파일') return '실행 파일 · 더블클릭으로 쓴다';
+      if (도구.형태 === '실행 파일') return '실행 파일 · 더블클릭으로 쓴다';
       return '로컬 웹앱 · 버튼 화면에서 쓴다';
     }
-    return '';
+    return '똑햄 에이전트 규칙';
   }
 
   /* ── 머리 */
-  var 부품켜짐 = Object.keys(부품).filter(function(k){ return 부품[k] && 부품[k].쓴다; });
+  var metaCount = track === '에이전트'
+    ? '<b>' + 서브.length + '</b> SUB &#183; <b>' + 스킬목록.length + '</b> SKILLS'
+    : (track === '스킬' ? '<b>1</b> SKILL' : '<b>1</b> TOOL');
   var head =
     '<div class="hero">' +
       '<div>' +
@@ -247,7 +246,7 @@
       '</div>' +
       '<div class="hero-meta">' +
         '<span class="dot">&#9679;</span> AGENT BLUEPRINT<br>' +
-        '<b>' + 과정.length + '</b> STEPS &#183; <b>' + 부품켜짐.length + '</b> PARTS' +
+        '<b>' + 과정.length + '</b> STEPS &#183; ' + metaCount +
         (has(D.만든날짜) ? ' &#183; ' + esc(D.만든날짜) : '') +
         (has(D.만든사람) ? '<br>' + esc(D.만든사람) : '') +
       '</div>' +
@@ -291,7 +290,7 @@
       '<div class="phead"><span class="no">01</span><span class="tt">무엇으로</span>' +
         '<span class="ct">자료 ' + (매번.length + 고정.length) + '종</span></div>' +
       '<div class="grp"><div class="glabel">매번 바뀌는 자료</div>' + itemRows(매번, true) + '</div>' +
-      '<div class="grp"><div class="glabel">늘 참고하는 자료</div>' + itemRows(고정, false) + '</div>' +
+      '<div class="grp"><div class="glabel">자주 보는 파일</div>' + itemRows(고정, false) + '</div>' +
       '<div class="grp"><div class="glabel">머릿속에만 있는 규칙</div>' +
         (규칙.length ? plainRows(규칙)
           : '<div class="warn"><b>아직 비어 있다</b>남에게 시키면 꼭 틀리는 것을 여기에 적어야 내 것이 된다</div>') +
@@ -314,48 +313,45 @@
     if (w === 'AI+확인')  return '<span class="who check">AI+확인</span>';
     return '<span class="who ai">AI</span>';
   }
-  function cardCls(st, out){
+  function ownTag(o){
+    if (!에이전트 || !has(o)) return '';
+    if (o === '메인') return '<span class="own own-main">메인</span>';
+    return '<span class="own">' + esc(o) + '</span>';
+  }
+  function cardCls(st){
     var c = 'scard';
     if (st.담당 === '사람') c += ' human';
     else if (st.담당 === 'AI+확인') c += ' check';
-    if (out) c += ' out';
     return c;
   }
 
   var flowHtml = lanes.map(function(L, li){
-    var out = L.steps.every(function(s){ return !inScope(s.순서); });
     var lb = L.par
       ? '<div class="lb"><span class="n">동시에</span><span class="s">' + L.steps.length + ' 갈래</span></div>'
       : '<div class="lb"><span class="n">' + String(L.steps[0].순서).padStart(2,'0') + '</span>' +
         (has(L.steps[0].루프대상) ? '<span class="s">LOOP</span>' : '') + '</div>';
     var cards = L.steps.map(function(st){
-      var 종료 = (부품.평가담당 || {}).종료조건;
       var loop = has(st.루프대상)
         ? '<em class="loopsub">&#8634; ' + esc(st.루프대상) + '단계로 되돌아간다' +
-          (has(종료) ? ' &#183; ' + esc(종료) + '하면 멈춘다' : '') + '</em>'
+          (has(st.멈춤조건) ? ' &#183; ' + esc(st.멈춤조건) : '') + '</em>'
         : '';
-      return '<div class="' + cardCls(st, out) + '">' +
+      return '<div class="' + cardCls(st) + '">' +
         (L.par ? '<span class="who ai" style="opacity:.75">' + String(st.순서).padStart(2,'0') + '</span>' : '') +
         '<span class="nm">' + esc(st.이름 || '') + loop + '</span>' +
-        '<span class="tags">' + (st.병목 ? '<span class="bn">오래 걸림</span>' : '') + whoTag(st.담당) + '</span>' +
+        '<span class="tags">' + ownTag(st.맡는곳) + whoTag(st.담당) + '</span>' +
         '</div>';
     }).join('');
-    return '<div class="lane' + (out ? ' out' : '') + '" data-li="' + li + '">' + lb +
+    return '<div class="lane" data-li="' + li + '">' + lb +
       '<div class="cards">' + cards + '</div></div>';
   }).join('');
 
   var 지시 = arr(구성.지시요지);
-  var scopeBar = 이번.length && 이번.length < 과정.length
-    ? '<div class="scope"><span class="tag">이번에 만들 것 ' + 이번.length + '단계</span><span class="bar"></span>' +
-      '<span>나머지 ' + (과정.length - 이번.length) + '단계는 다음에</span></div>' : '';
-
   var mid =
     '<div class="pnl mid">' +
       '<div class="phead"><span class="no">02</span><span class="tt">어떻게</span>' +
         '<span class="ct">' + 과정.length + '단계</span></div>' +
       '<div class="flowwrap"><div class="flow" id="flow">' + flowHtml + '</div>' +
         '<svg class="loopsvg" id="loopsvg"></svg></div>' +
-      scopeBar +
       (지시.length ? '<div class="rules"><div class="glabel">' +
         (track === '에이전트' ? '지시 요지' : '지켜야 할 것') + '</div><div class="cols">' +
         plainRows(지시) + '</div></div>' : '') +
@@ -363,8 +359,8 @@
         '<span><i style="background:var(--teal)"></i>AI가 한다</span>' +
         '<span><i style="background:var(--human)"></i>사람이 한다</span>' +
         '<span><i style="background:linear-gradient(var(--teal) 50%,var(--human) 50%)"></i>AI가 하고 사람이 확인</span>' +
-        '<span><i style="background:var(--alert)"></i>오래 걸리는 곳</span>' +
-        '<span><i style="background:transparent;border:1px dashed var(--line3)"></i>이번엔 안 만듦</span>' +
+        (에이전트 ? '<span><span class="own own-main">메인</span>메인 파일이 직접</span>' +
+          '<span><span class="own">이름</span>그 서브 에이전트가 맡음</span>' : '') +
       '</div>' +
     '</div>';
 
@@ -376,45 +372,90 @@
         (has(결과물.형식) ? '<span class="ct">' + esc(결과물.형식) + '</span>' : '') + '</div>' +
       '<div class="outname">' + esc(결과물.이름 || '이름 미정') + '</div>' +
       '<div class="chips">' + arr(결과물.전달방식).map(function(t){ return '<span>' + esc(t) + '</span>'; }).join('') + '</div>' +
-      (has(결과물.받는사람) ? '<div class="kv"><span class="k">받는 사람</span><span class="v">' + esc(결과물.받는사람) + '</span></div>' : '') +
-      (has(결과물.주기)     ? '<div class="kv"><span class="k">주기</span><span class="v">' + esc(결과물.주기) + '</span></div>' : '') +
+      (has(결과물.받는사람)   ? '<div class="kv"><span class="k">받는 사람</span><span class="v">' + esc(결과물.받는사람) + '</span></div>' : '') +
+      (has(결과물.보내는수단) ? '<div class="kv"><span class="k">보내는 수단</span><span class="v">' + esc(결과물.보내는수단) + '</span></div>' : '') +
+      (has(결과물.주기)       ? '<div class="kv"><span class="k">주기</span><span class="v">' + esc(결과물.주기) + '</span></div>' : '') +
       '<div class="grp" style="margin-top:13px"><div class="glabel">다 됐다는 기준</div>' +
         (기준.length ? plainRows(기준) : '<div class="empty">아직 안 정함</div>') + '</div>' +
+      (arr(D.반려사유).length ? '<div class="grp"><div class="glabel">되돌아온 이유</div>' + plainRows(arr(D.반려사유)) + '</div>' : '') +
     '</div>';
 
-  /* ── 부품 6칸 */
-  var PARTS = [
-    { k:'스킬',           t:'서식·절차 스킬',  b:function(p){ return arr(p.내용).join(' · '); } },
-    { k:'나눠서동시에',   t:'나눠서 동시에',   b:function(p){ return arr(p.내용).join(' · '); } },
-    { k:'평가담당',       t:'평가 담당',       b:function(p){ return arr(p.기준).join(' · ') + (has(p.종료조건) ? ' / ' + p.종료조건 : ''); } },
-    { k:'보내기연결',     t:'보내기 연결',     b:function(p){ return p.내용 || ''; } },
-    { k:'혼자도는도구',   t:'혼자 도는 도구',  b:function(p){ return (p.단계 || '') + (has(p.웹앱으로안되는이유) ? ' — ' + p.웹앱으로안되는이유 : ''); } },
-    { k:'보여주는페이지', t:'보여주는 페이지', b:function(p){ return p.내용 || ''; } }
-  ];
-  var pgrid = PARTS.map(function(P){
-    var p = 부품[P.k] || {};
-    var on = !!p.쓴다;
-    var body = on ? (P.b(p) || '쓴다') : (p.안쓰는이유 || '이번엔 안 씀');
-    return '<div class="part' + (on ? '' : ' off') + '">' +
-      '<div class="h"><i></i>' + esc(P.t) + '</div>' +
-      '<div class="b">' + esc(body) + '</div></div>';
-  }).join('');
+  /* ── 구성 */
+  function col(title, count, body, off){
+    return '<div class="part' + (off ? ' off' : '') + '">' +
+      '<div class="h"><i></i>' + esc(title) + (count != null ? '<span class="ct">' + count + '</span>' : '') + '</div>' +
+      body + '</div>';
+  }
+  function it(html){ return '<div class="it">' + html + '</div>'; }
+  function steps(name){
+    return 과정.filter(function(st){ return st.맡는곳 === name; })
+      .map(function(st){ return st.순서; }).join(', ');
+  }
+
+  var cols = [], subTitle = '';
+  if (track === '에이전트') {
+    var A = 에이전트 || {};
+    var 메인일 = arr(A.메인이직접);
+    cols.push(col('메인 파일', null,
+      it('<b>' + esc(A.메인파일 || 'CLAUDE.md') + '</b> <span class="sm">목적과 라우팅</span>') +
+      (메인일.length ? 메인일.map(function(t){ return it('&#183; ' + esc(t)); }).join('') : '')));
+    cols.push(col('서브 에이전트', 서브.length,
+      서브.length ? 서브.map(function(a){
+        var 단계 = steps(a.이름);
+        return it('<b>' + esc(a.이름) + '</b> <span class="sm">' + (단계 ? esc(단계) + '단계' : '') + '</span><br>' +
+          esc(a.맡는일 || '') +
+          (arr(a.스킬).length ? '<br><span class="sm">스킬 ' + esc(arr(a.스킬).join(' · ')) + '</span>' : ''));
+      }).join('') : '<div class="b">없음 — 메인이 직접 한다</div>', !서브.length));
+    cols.push(col('스킬', 스킬목록.length,
+      스킬목록.length ? 스킬목록.map(function(k){
+        var kind = k.분류 === '도메인' ? '<span class="kind dom">도메인</span>' : '<span class="kind gen">범용</span>';
+        var 곳 = arr(k.쓰는곳).map(function(x){ return x === '모두' ? '모든 담당' : (x === '메인' ? '메인' : x); }).join(' · ');
+        return it('<b>' + esc(k.이름) + '</b>' + kind +
+          (has(k.이미있는것) ? ' <span class="chip">' + esc(k.이미있는것) + '</span>' : '') +
+          (곳 ? '<br><span class="sm">' + esc(곳) + '</span>' : ''));
+      }).join('') : '<div class="b">없음</div>', !스킬목록.length));
+    var 참고 = 폴더.참고 || {}, 프로젝트 = 폴더.프로젝트 || {}, 보완 = 폴더.보완기록 || {};
+    var 폴더줄 = [];
+    if (has(참고.이름)) 폴더줄.push(it('<b>' + esc(참고.이름) + '</b> <span class="sm">참고 폴더</span>' +
+      ((has(참고.목차) || has(참고.요약)) ? '<br><span class="sm">' + esc([참고.목차, 참고.요약].filter(has).join(' · ')) + '</span>' : '')));
+    if (has(프로젝트.이름규칙)) 폴더줄.push(it('<b>' + esc(프로젝트.이름규칙) + '</b> <span class="sm">' +
+      (has(프로젝트.단위) ? esc(프로젝트.단위) + ' 프로젝트' : '프로젝트') + '</span>' +
+      (has(프로젝트.현황파일) ? '<br><span class="sm">현황 ' + esc(프로젝트.현황파일) +
+        (arr(프로젝트.안에두는것).length ? ' · ' + esc(arr(프로젝트.안에두는것).join(' ')) : '') + '</span>' : '')));
+    if (has(보완.이름)) 폴더줄.push(it('<b>' + esc(보완.이름) + '</b> <span class="sm">보완 기록</span>'));
+    cols.push(col('폴더', null, 폴더줄.length ? 폴더줄.join('') : '<div class="b">아직 안 정함</div>'));
+    subTitle = '메인 파일이 길을 안내하고 서브 에이전트와 스킬이 나눠 맡는다';
+  } else if (track === '스킬') {
+    var 서식 = arr(구성.쓰는서식스킬);
+    cols.push(col('만드는 것', null, it('<b>' + esc(D.이름 || '스킬') + '</b><br><span class="sm">SKILL.md 하나 · 업무 매뉴얼</span>')));
+    cols.push(col('빌려 쓰는 서식 스킬', 서식.length,
+      서식.length ? 서식.map(function(t){ return it(esc(t)); }).join('') : '<div class="b">없음</div>', !서식.length));
+    cols.push(col('두는 곳', null, it('<b>Claude 계정</b><br><span class="sm">따로 만드는 폴더 없음</span>')));
+    subTitle = '스킬 하나로 끝낸다';
+  } else {
+    cols.push(col('만드는 것', null,
+      it('<b>' + (도구.형태 === '실행 파일' ? '실행 파일' : '버튼 화면 (로컬 웹앱)') + '</b>' +
+        (has(도구.웹앱으로안되는이유) ? '<br><span class="sm">' + esc(도구.웹앱으로안되는이유) + '</span>' : ''))));
+    cols.push(col('보여주는 화면', null,
+      has(도구.보여주는화면) ? it(esc(도구.보여주는화면)) : '<div class="b">없음</div>', !has(도구.보여주는화면)));
+    cols.push(col('두는 곳', null, it('<b>내 PC</b><br><span class="sm">따로 만드는 폴더 없음</span>')));
+    subTitle = '명령어 없이 버튼으로 쓴다';
+  }
 
   var parts =
     '<div class="parts">' +
-      '<div class="parts-hd"><span class="tt">부품</span>' +
-        '<span class="sub">' + 부품켜짐.length + ' / 6 &#183; 쓰는 것과 안 쓰는 것</span>' +
+      '<div class="parts-hd"><span class="tt">구성</span>' +
+        '<span class="sub">' + esc(subTitle) + '</span>' +
         '<button class="copy" id="copybtn">세팅 프롬프트 복사</button></div>' +
-      '<div class="pgrid">' + pgrid + '</div>' +
+      '<div class="pgrid" style="--cols:' + cols.length + '">' + cols.join('') + '</div>' +
     '</div>';
 
   /* ── 마무리 띠 */
   var bits = [];
-  if (has(구성.실행방식))         bits.push(['시키는 법', 구성.실행방식]);
-  if (arr(구성.폴더).length)       bits.push(['폴더', arr(구성.폴더).join(' ')]);
+  if (has(구성.실행방식))           bits.push(['시키는 법', 구성.실행방식]);
   if (arr(구성.사람확인지점).length) bits.push(['사람이 볼 곳', arr(구성.사람확인지점).join(' · ')]);
-  if (arr(D.다음단계).length)      bits.push(['다음에', arr(D.다음단계).join(' · ')]);
-  if (arr(D.미정).length)          bits.push(['아직 안 정함', arr(D.미정).join(' · ')]);
+  if (arr(D.다음단계).length)        bits.push(['다음에', arr(D.다음단계).join(' · ')]);
+  if (arr(D.미정).length)            bits.push(['아직 안 정함', arr(D.미정).join(' · ')]);
 
   var note = bits.length ? '<div class="note">' + bits.map(function(b, ix){
     return (ix ? '<span class="sep">&middot;</span>' : '') +
